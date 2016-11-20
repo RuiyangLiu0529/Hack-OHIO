@@ -89,6 +89,9 @@ import java.util.List;
 
 import static android.R.attr.path;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
+
 public class RecognizeActivity extends ActionBarActivity {
 
     // Flag to indicate which task is to be performed.
@@ -168,6 +171,10 @@ public class RecognizeActivity extends ActionBarActivity {
 
         mButtonSelectImage = (Button) findViewById(R.id.buttonSelectImage);
         mEditText = (EditText) findViewById(R.id.editTextResult);
+        AVLoadingIndicatorView avi = (AVLoadingIndicatorView) findViewById(R.id.avi);
+
+        avi.hide();
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -251,6 +258,7 @@ public class RecognizeActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("RecognizeActivity", "onActivityResult");
+        startAnim();
 
         switch (requestCode) {
             case REQUEST_SELECT_IMAGE:
@@ -481,7 +489,7 @@ public class RecognizeActivity extends ActionBarActivity {
                 }
                 mEditText.setSelection(0);
             }
-
+            stopAnim();
             mButtonSelectImage.setEnabled(true);
         }
     }
@@ -576,4 +584,19 @@ public class RecognizeActivity extends ActionBarActivity {
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
     }
+
+    void startAnim() {
+        AVLoadingIndicatorView avi = (AVLoadingIndicatorView) findViewById(R.id.avi);
+
+        avi.show();
+        // or avi.smoothToShow();
+    }
+
+    void stopAnim() {
+        AVLoadingIndicatorView avi = (AVLoadingIndicatorView) findViewById(R.id.avi);
+
+        avi.hide();
+        // or avi.smoothToHide();
+    }
+
 }

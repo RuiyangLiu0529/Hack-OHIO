@@ -30,4 +30,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.wang.avi:library:2.1.3'
 }
