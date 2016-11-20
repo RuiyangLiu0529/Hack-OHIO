@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/libs/internal_impl-23.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.0.0_0e29af85a7a36a3de4da0a954bf5afedbb26c417/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="35e37733830e845bd4e916197e009a6a31fb11c8">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_fa82c1f897b008bf41bb1e8159004d7d0cd76bd8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appindexing-8.4.0_7f7a86ac8c28a3ce32d0b0c009a42f2f1a6fe104/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-21.0.3_07bfb63985470ca235f93e6a74afb5e3f4585217/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="85580f7e643f4e319878f282874afccc3b1b95ed">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.microsoft.projectoxford-emotion-1.0.0_9586fa1dd9ca39da80e02f5f3da324fec24a3ab9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.5/686c608d1805b6d4d425ec4459e88164ffc85870/gson-2.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.5_998ed3109261a0f6c6a2332c7a850552a2c32a32/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-8.4.0_61333e38b659331c6d0ff41575417d306c4b8c36/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-8.4.0_2fc2c004076e527ef55174d7948672775da379b4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.0.0_1dd859c90ff641b09f6e0079c5d89c1a9981daad/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.0.0_2087c5540bcb6c71244b9c1f1f16aeebba41c2f3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/libs/commons-io-2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/commons-io-2.4_dd7474d69ada4cc497f6cea653fbdded6250248f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="eb3a134e6d363876367bb2aee23c9e34b54113fc">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_440176740e2f542f90447048029b3f9d946a25c5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/face/1.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b9885b9cbfc39129a13674d39d0cae321fc0dc97">
+        <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.microsoft.projectoxford-face-1.0.0_2ff5e51fb54c16c21da50159352fdaa0245fd1c5/classes.dex" />
+    </item>
+
+</items>
