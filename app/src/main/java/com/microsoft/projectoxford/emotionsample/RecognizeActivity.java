@@ -541,9 +541,9 @@ public class RecognizeActivity extends ActionBarActivity implements View.OnClick
         cv.drawBitmap(src, 0, 0, null);// 在 0，0坐标开始画入src
         // draw watermark into
 
-        Bitmap resized = Bitmap.createScaledBitmap(watermark, redius * 2, redius * 2, true);
+        Bitmap resized = Bitmap.createScaledBitmap(watermark, redius * 4, redius * 4, true);
 
-        cv.drawBitmap(resized, start.x, start.y, null);// 在src的右下角画入水印
+        cv.drawBitmap(resized, start.x-redius, start.y-(int)(redius*1.2), null);// 在src的右下角画入水印
         // save all clip
         cv.save(Canvas.ALL_SAVE_FLAG);// 保存
         // store
