@@ -40,6 +40,10 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.microsoft.projectoxford.emotionsample.R;
@@ -61,6 +65,14 @@ public class SelectImageActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_image);
+
+        ImageView infoOperatingIV = (ImageView)findViewById(R.id.imageselect);
+        Animation operatingAnim = AnimationUtils.loadAnimation(this, R.anim.tip);
+
+        LinearInterpolator lin = new LinearInterpolator();
+        infoOperatingIV.startAnimation(operatingAnim);
+
+        operatingAnim.setInterpolator(lin);
     }
 
     // Save the activity state when it's going to stop.
