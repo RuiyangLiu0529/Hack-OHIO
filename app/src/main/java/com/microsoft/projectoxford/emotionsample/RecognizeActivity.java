@@ -164,11 +164,14 @@ public class RecognizeActivity extends ActionBarActivity implements View.OnClick
     }
 
     private String mCurrentPhotoPath;
-    @Override public void onClick(View v) {
+
+    @Override
+    public void onClick(View v) {
         Toast.makeText(this, "Short click", Toast.LENGTH_SHORT).show();
     }
 
-    @Override public boolean onLongClick(View v) {
+    @Override
+    public boolean onLongClick(View v) {
         if (v.getId() == R.id.ripple_layout_2) {
             Toast.makeText(this, "Long click not consumed", Toast.LENGTH_SHORT).show();
             return false;
@@ -212,9 +215,6 @@ public class RecognizeActivity extends ActionBarActivity implements View.OnClick
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
         if (id == R.id.send_to_email) {
             if (mCurrentPhotoPath == null) {
                 return true;
@@ -232,7 +232,18 @@ public class RecognizeActivity extends ActionBarActivity implements View.OnClick
             // the mail subject
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
             startActivity(Intent.createChooser(emailIntent, "Send email..."));
+        }
 
+        if (id == R.id.share) {
+            if (mCurrentPhotoPath == null) {
+                return true;
+            }
+            File f = new File(mCurrentPhotoPath);
+            //Uri contentUri = Uri.fromFile(f);
+
+            String type = "image/*";
+
+            createInstagramIntent(type, f);
         }
 
 
@@ -439,8 +450,7 @@ public class RecognizeActivity extends ActionBarActivity implements View.OnClick
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                     stopAnim();
-                }
-                else{
+                } else {
                     faceDetected = true;
                 }
 
@@ -485,9 +495,9 @@ public class RecognizeActivity extends ActionBarActivity implements View.OnClick
                     tmp.add(r.scores.contempt);
                     tmp.add(r.scores.disgust);
                     tmp.add(r.scores.fear);
-                    tmp.add(r.scores.happiness/5);
+                    tmp.add(r.scores.happiness / 5);
                     tmp.add(r.scores.neutral / 20);
-                    tmp.add(r.scores.sadness*2);
+                    tmp.add(r.scores.sadness * 2);
                     tmp.add(r.scores.surprise);
 
                     imgSelector.add(tmp.indexOf(Collections.max(tmp)));
@@ -543,7 +553,7 @@ public class RecognizeActivity extends ActionBarActivity implements View.OnClick
 
         Bitmap resized = Bitmap.createScaledBitmap(watermark, redius * 4, redius * 4, true);
 
-        cv.drawBitmap(resized, start.x-redius, start.y-(int)(redius*1.2), null);// 在src的右下角画入水印
+        cv.drawBitmap(resized, start.x - redius, start.y - (int) (redius * 1.2), null);// 在src的右下角画入水印
         // save all clip
         cv.save(Canvas.ALL_SAVE_FLAG);// 保存
         // store
@@ -606,4 +616,22 @@ public class RecognizeActivity extends ActionBarActivity implements View.OnClick
         // or avi.smoothToHide();
     }
 
+    public void createInstagramIntent(String type, File media){
+
+        // Create the new Intent using the 'Send' action.
+        Intent share = new Intent(Intent.ACTION_SEND);
+
+        // Set the MIME type
+        share.setType(type);
+
+        // Create the URI from the media
+        //File media = new File(mediaPath);
+        Uri uri = Uri.fromFile(media);
+
+        // Add the URI to the Intent.
+        share.putExtra(Intent.EXTRA_STREAM, uri);
+
+        // Broadcast the Intent.
+        startActivity(Intent.createChooser(share, "Share to"));
+    }
 }

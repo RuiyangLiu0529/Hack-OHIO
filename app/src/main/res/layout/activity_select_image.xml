@@ -29,25 +29,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/take_photo"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
             android:onClick="takePhoto"
-            style="@style/ButtonStyle" />
+            style="@style/ButtonStyle"
+            android:layout_marginBottom="39dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
     </RelativeLayout>
 
+
     <RelativeLayout android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="283dp">
 
         <Button
             android:id="@+id/button_select_a_photo_in_album"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/select_image_in_album"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:onClick="selectImageInAlbum"
-            style="@style/ButtonStyle" />
+            style="@style/ButtonStyle"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/imageselect"
+            android:src="@drawable/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_select_a_photo_in_album"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp" />
+
     </RelativeLayout>
 
 </LinearLayout>
