@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="c261a731a102ab852e0c86d2796c81c8eecc8fe1">
+        sha1="5ceeb7da04b8062f4b6018b354d1845ba5408d79">
         <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_fa82c1f897b008bf41bb1e8159004d7d0cd76bd8/classes.dex" />
     </item>
     <item
@@ -115,7 +115,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="3995ca8e1d0757e0787087196ca3362b49d0172d">
+        sha1="04f9d943ed761967ae4b805ebd018cd89f384da5">
         <dex dex="/Users/weipengliu/Desktop/android/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_440176740e2f542f90447048029b3f9d946a25c5/classes.dex" />
     </item>
     <item

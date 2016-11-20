@@ -20,23 +20,41 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="4dp"
             android:text="Select an image to analyze" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/buttonSelectImage"
-                android:layout_width="wrap_content"
+            <com.microsoft.projectoxford.emotionsample.MaterialRippleLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="selectImage"
-                android:text="Select Image" />
+                android:background="#F01C40"
+                android:layout_marginTop="24dp"
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleColor="#FF0C00"
+                app:mrl_rippleAlpha="0.2"
+                app:mrl_rippleDelayClick="false"
+                app:mrl_rippleHover="true">
+
+                <Button
+                    android:id="@+id/ripple_layout_2"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/selector"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="select Image"
+                    android:onClick="selectImage"/>
+
+            </com.microsoft.projectoxford.emotionsample.MaterialRippleLayout>
 
             <ImageView
+                android:layout_marginTop="25dp"
                 android:id="@+id/selectedImage"
+                android:layout_gravity="center"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_toEndOf="@+id/image_control"
@@ -46,21 +64,15 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_weight="1.03"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/editTextResult"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textMultiLine" />
+            android:orientation="vertical">
 
             <com.wang.avi.AVLoadingIndicatorView
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:indicatorName="LineScalePulseOutRapidIndicator"
@@ -68,6 +80,7 @@
                 app:indicatorColor="@color/button_enabled_background"
 
                 />
+
         </LinearLayout>
 
     </LinearLayout>

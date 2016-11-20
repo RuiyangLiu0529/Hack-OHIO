@@ -32,7 +32,9 @@
 //
 package com.microsoft.projectoxford.emotionsample;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -56,6 +58,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -92,7 +95,7 @@ import static android.R.attr.path;
 import com.wang.avi.AVLoadingIndicatorView;
 
 
-public class RecognizeActivity extends ActionBarActivity {
+public class RecognizeActivity extends ActionBarActivity implements View.OnClickListener, View.OnLongClickListener {
 
     // Flag to indicate which task is to be performed.
     private static final int REQUEST_SELECT_IMAGE = 0;
@@ -117,6 +120,8 @@ public class RecognizeActivity extends ActionBarActivity {
     private GoogleApiClient client2;
 
     private File curFile;
+
+    private static boolean faceDetected = true;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -159,6 +164,18 @@ public class RecognizeActivity extends ActionBarActivity {
     }
 
     private String mCurrentPhotoPath;
+    @Override public void onClick(View v) {
+        Toast.makeText(this, "Short click", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override public boolean onLongClick(View v) {
+        if (v.getId() == R.id.ripple_layout_2) {
+            Toast.makeText(this, "Long click not consumed", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        Toast.makeText(this, "Long click and consumed", Toast.LENGTH_SHORT).show();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,8 +186,8 @@ public class RecognizeActivity extends ActionBarActivity {
             client = new EmotionServiceRestClient(getString(R.string.subscription_key));
         }
 
-        mButtonSelectImage = (Button) findViewById(R.id.buttonSelectImage);
-        mEditText = (EditText) findViewById(R.id.editTextResult);
+        mButtonSelectImage = (Button) findViewById(R.id.ripple_layout_2);
+        //mEditText = (EditText) findViewById(R.id.editTextResult);
         AVLoadingIndicatorView avi = (AVLoadingIndicatorView) findViewById(R.id.avi);
 
         avi.hide();
@@ -229,25 +246,29 @@ public class RecognizeActivity extends ActionBarActivity {
         try {
             new doRequest(this, false).execute();
         } catch (Exception e) {
-            mEditText.append("Error encountered. Exception is: " + e.toString());
+            //mEditText.append("Error encountered. Exception is: " + e.toString());
         }
+        if (faceDetected == false) {
+            mButtonSelectImage.setEnabled(true);
 
+            return;
+        }
         String faceSubscriptionKey = getString(R.string.faceSubscription_key);
         if (faceSubscriptionKey.equalsIgnoreCase("Please_add_the_face_subscription_key_here")) {
-            mEditText.append("\n\nThere is no face subscription key in res/values/strings.xml. Skip the sample for detecting emotions using face rectangles\n");
+            //mEditText.append("\n\nThere is no face subscription key in res/values/strings.xml. Skip the sample for detecting emotions using face rectangles\n");
         } else {
             // Do emotion detection using face rectangles provided by Face API.
             try {
                 new doRequest(this, true).execute();
             } catch (Exception e) {
-                mEditText.append("Error encountered. Exception is: " + e.toString());
+                //mEditText.append("Error encountered. Exception is: " + e.toString());
             }
         }
     }
 
     // Called when the "Select Image" button is clicked.
     public void selectImage(View view) {
-        mEditText.setText("");
+        //mEditText.setText("");
 
         Intent intent;
         intent = new Intent(RecognizeActivity.this, SelectImageActivity.class);
@@ -400,120 +421,106 @@ public class RecognizeActivity extends ActionBarActivity {
             // Display based on error existence
 
             if (this.useFaceRectangles == false) {
-                mEditText.append("\n\nRecognizing emotions with auto-detected face rectangles...\n");
-            } else {
-                mEditText.append("\n\nRecognizing emotions with existing face rectangles from Face API...\n");
+                //mEditText.append("\n\nRecognizing emotions with auto-detected face rectangles...\n");
+                if (result.size() == 0) {
+                    new AlertDialog.Builder(this.context)
+                            .setTitle(":(")
+                            .setMessage("No emotion detected!")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    stopAnim();
+                }
+                else{
+                    faceDetected = true;
+                }
+
+                return;
             }
+
+            //mEditText.append("\n\nRecognizing emotions with existing face rectangles from Face API...\n");
+
             if (e != null) {
-                mEditText.setText("Error: " + e.getMessage());
+                //mEditText.setText("Error: " + e.getMessage());
                 this.e = null;
             } else {
-                if (result.size() == 0) {
-                    mEditText.append("No emotion detected :(");
-                } else {
-                    Integer count = 0;
-                    // Covert bitmap to a mutable bitmap by copying it
-                    Bitmap bitmapCopy = mBitmap.copy(Bitmap.Config.ARGB_8888, true);
-                    Canvas faceCanvas = new Canvas(bitmapCopy);
-                    faceCanvas.drawBitmap(mBitmap, 0, 0, null);
-                    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-                    paint.setStyle(Paint.Style.STROKE);
-                    paint.setStrokeWidth(5);
-                    paint.setColor(Color.RED);
 
-                    ArrayList<Point> startCoordinates = new ArrayList<Point>();
-                    ArrayList<Integer> imgSize = new ArrayList<Integer>();
-                    ArrayList<Integer> imgSelector = new ArrayList<Integer>();
-                    ArrayList<Bitmap> imgs = new ArrayList<Bitmap>();
+                Integer count = 0;
+                // Covert bitmap to a mutable bitmap by copying it
+                Bitmap bitmapCopy = mBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                Canvas faceCanvas = new Canvas(bitmapCopy);
+                faceCanvas.drawBitmap(mBitmap, 0, 0, null);
+                Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(5);
+                paint.setColor(Color.RED);
 
+                ArrayList<Point> startCoordinates = new ArrayList<Point>();
+                ArrayList<Integer> imgSize = new ArrayList<Integer>();
+                ArrayList<Integer> imgSelector = new ArrayList<Integer>();
+                ArrayList<Bitmap> imgs = new ArrayList<Bitmap>();
 
-                    for (RecognizeResult r : result) {
-                        /*
-                        mEditText.append(String.format("\nFace #%1$d \n", count));
-                        mEditText.append(String.format("\t anger: %1$.5f\n", r.scores.anger));
-                        mEditText.append(String.format("\t contempt: %1$.5f\n", r.scores.contempt));
-                        mEditText.append(String.format("\t disgust: %1$.5f\n", r.scores.disgust));
-                        mEditText.append(String.format("\t fear: %1$.5f\n", r.scores.fear));
-                        mEditText.append(String.format("\t happiness: %1$.5f\n", r.scores.happiness));
-                        mEditText.append(String.format("\t neutral: %1$.5f\n", r.scores.neutral));
-                        mEditText.append(String.format("\t sadness: %1$.5f\n", r.scores.sadness));
-                        mEditText.append(String.format("\t surprise: %1$.5f\n", r.scores.surprise));
-                        mEditText.append(String.format("\t face rectangle: %d, %d, %d, %d", r.faceRectangle.left, r.faceRectangle.top, r.faceRectangle.width, r.faceRectangle.height));
-                        */
+                for (RecognizeResult r : result) {
+                    faceCanvas.drawRect(r.faceRectangle.left,
+                            r.faceRectangle.top,
+                            r.faceRectangle.left + r.faceRectangle.width,
+                            r.faceRectangle.top + r.faceRectangle.height,
+                            paint);
 
-                        faceCanvas.drawRect(r.faceRectangle.left,
-                                r.faceRectangle.top,
-                                r.faceRectangle.left + r.faceRectangle.width,
-                                r.faceRectangle.top + r.faceRectangle.height,
-                                paint);
+                    Point coord = new Point(r.faceRectangle.left, r.faceRectangle.top);
+                    startCoordinates.add(coord);
+                    imgSize.add(r.faceRectangle.width / 2);
 
-                        Point coord = new Point(r.faceRectangle.left, r.faceRectangle.top);
-                        startCoordinates.add(coord);
-                        imgSize.add(r.faceRectangle.width / 2);
+                    ArrayList<Double> tmp = new ArrayList<Double>();
+                    tmp.add(r.scores.anger);
+                    tmp.add(r.scores.contempt);
+                    tmp.add(r.scores.disgust);
+                    tmp.add(r.scores.fear);
+                    tmp.add(r.scores.happiness/5);
+                    tmp.add(r.scores.neutral / 20);
+                    tmp.add(r.scores.sadness*2);
+                    tmp.add(r.scores.surprise);
 
-                        ArrayList<Double> tmp = new ArrayList<Double>();
-                        tmp.add(r.scores.anger);
-                        tmp.add(r.scores.contempt);
-                        tmp.add(r.scores.disgust);
-                        tmp.add(r.scores.fear);
-                        tmp.add(r.scores.happiness);
-                        tmp.add(r.scores.neutral / 100);
-                        tmp.add(r.scores.sadness);
-                        tmp.add(r.scores.surprise);
+                    imgSelector.add(tmp.indexOf(Collections.max(tmp)));
 
-                        imgSelector.add(tmp.indexOf(Collections.max(tmp)));
-
-                        count++;
-                    }
-
-                    imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.anger));
-                    imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.contempt));
-                    imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.disgust));
-                    imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.fear));
-                    imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.happiness));
-                    imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.neutral));
-                    imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.sadness));
-                    imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.surprise));
-
-                    Bitmap merged_bitmap = mBitmap;
-
-                    for (int i = 0; i < count; i++) {
-                        merged_bitmap = createWaterMaskImage(context, merged_bitmap, imgs.get(imgSelector.get(i)), startCoordinates.get(i), imgSize.get(i));
-                    }
-
-                    ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
-                    imageView.setImageDrawable(new BitmapDrawable(getResources(), merged_bitmap));
-
-                    saveImageToGallery(this.context, merged_bitmap);
-
+                    count++;
                 }
-                mEditText.setSelection(0);
+
+                imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.anger));
+                imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.contempt));
+                imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.disgust));
+                imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.fear));
+                imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.happiness));
+                imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.neutral));
+                imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.sadness));
+                imgs.add(BitmapFactory.decodeResource(getResources(), R.drawable.surprise));
+
+                Bitmap merged_bitmap = mBitmap;
+
+                for (int i = 0; i < count; i++) {
+                    merged_bitmap = createWaterMaskImage(context, merged_bitmap, imgs.get(imgSelector.get(i)), startCoordinates.get(i), imgSize.get(i));
+                }
+
+                ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
+                imageView.setImageDrawable(new BitmapDrawable(getResources(), merged_bitmap));
+
+                saveImageToGallery(this.context, merged_bitmap);
+
+
+                //mEditText.setSelection(0);
             }
             stopAnim();
             mButtonSelectImage.setEnabled(true);
         }
-    }
-
-    public static Bitmap drawableToBitmap(Drawable drawable) {
-        Bitmap bitmap = null;
-
-        if (drawable instanceof BitmapDrawable) {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if (bitmapDrawable.getBitmap() != null) {
-                return bitmapDrawable.getBitmap();
-            }
-        }
-
-        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
-        } else {
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        }
-
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
     }
 
     private Bitmap createWaterMaskImage(Context gContext, Bitmap src, Bitmap watermark, Point start, int redius) {
